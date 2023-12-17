@@ -46,6 +46,7 @@ export default {
   color: #ffffff;
   padding: 0;
   margin: 0;
+  margin-top: -25px; 
 }
 
 .profile-picture {
@@ -79,10 +80,11 @@ p {
   display: flex; /* Use flexbox for the links container */
   justify-content: flex-start; /* Align links to the start */
   align-items: center; /* Center links vertically */
-  gap: 10px; /* Creates a gap between each link */
+  gap: 20px; /* Creates a gap between each link */
 }
 
 .links a.social-link {
+  position: relative;
   display: flex; /* Use flexbox for individual link alignment */
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
@@ -93,16 +95,76 @@ p {
   overflow: hidden; /* Ensures no overflow from the content */
 }
 
+.links a.social-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%; /* Take full width to match the parent link */
+  height: 3px; /* Initial height of the blue bar */
+  background-color: #05BDFB; /* Blue color */
+  transition: height 0.3s; /* Animate the height change */
+  z-index: 0; /* Ensure it's under the image */
+}
+
+.links a.social-link:hover::after {
+  height: 100%; /* Full height on hover */
+}
+
 .links a.social-link img {
   width: 80%; /* Scaled down size, adjust as needed */
   height: auto; /* Maintain aspect ratio */
   object-fit: contain; /* Ensures the image fits within the element's box */
+  position: relative; /* Ensure the image is above the pseudo-element */
+  z-index: 1;
 }
 
-.links a.social-link:hover {
-  background-color: #e1e1e1; /* Light grey background on hover */
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-picture,
+  .description-column {
+    flex: 0 0 auto;
+    max-width: 100%;
+    text-align: center;
+    padding: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .profile-picture {
+    margin-bottom: 20px; /* Add some space between the picture and description */
+  }
+
+  .profile-picture img {
+    max-width: 18em; /* Scale down image size for smaller screens */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Scale down heading font size for readability */
+  }
+
+  p {
+    font-size: 1rem; /* Scale down paragraph font size for readability */
+  }
+
+  .links {
+    justify-content: center; /* Center links when stacked */
+  }
+
+  .links a.social-link {
+    width: 44px; /* Scale down link size for smaller screens */
+    height: 44px; /* Scale down link size for smaller screens */
+  }
+
+  .links a.social-link img {
+    width: 70%; /* Adjust image size within the link */
+  }
 }
 
-
-/* Responsive styles and additional styling as needed */
 </style>
